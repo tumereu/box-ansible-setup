@@ -2,6 +2,7 @@ version: '3'
 services:
   screeps:
     image: screepers/screeps-launcher
+    user: screeps
     volumes:
       - /etc/screeps-server/config.yml:/screeps/config.yml
       - /var/lib/screeps-server/screeps:/screeps
@@ -14,12 +15,14 @@ services:
 
   mongo:
     image: mongo
+    user: screeps
     volumes:
       - /var/lib/screeps-server/mongo:/data/db
     restart: unless-stopped
 
   redis:
     image: redis
+    user: screeps
     volumes:
       - /var/lib/screeps-server/redis:/data
     restart: unless-stopped

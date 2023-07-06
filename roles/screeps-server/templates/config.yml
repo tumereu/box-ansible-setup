@@ -3,6 +3,8 @@ mods:
 - screepsmod-mongo
 - screepsmod-admin-utils
 - screepsmod-auth
+- screepsmod-tickrate
+- screepsmod-features
 bots:
   simplebot: "screepsbot-zeswarm"
 localMods: ./mods

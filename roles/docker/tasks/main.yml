@@ -20,3 +20,8 @@
     name: docker-ce
     state: latest
     update_cache: true
+
+- name: Ensure the 'docker' user group exists
+  group:
+    name: docker
+    state: present
