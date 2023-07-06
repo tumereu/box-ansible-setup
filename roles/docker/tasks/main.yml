@@ -1,0 +1,22 @@
+- name: Ensure prerequisites are installed
+  apt:
+    pkg:
+      - curl
+      - gnupg
+      - ca-certificates
+
+- name: Add Docker GPG apt Key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Add Docker Repository
+  apt_repository:
+    repo: deb https://download.docker.com/linux/ubuntu focal stable
+    state: present
+
+- name: Ensure the latest Docker CE is installed
+  apt:
+    name: docker-ce
+    state: latest
+    update_cache: true

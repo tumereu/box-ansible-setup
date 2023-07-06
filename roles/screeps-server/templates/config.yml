@@ -1,0 +1,14 @@
+steamKey: "{{ STEAM_API_KEY }}"
+mods:
+- screepsmod-mongo
+- screepsmod-admin-utils
+- screepsmod-auth
+bots:
+  simplebot: "screepsbot-zeswarm"
+localMods: ./mods
+serverConfig:
+  welcomeText:  |
+    <div>
+      Welcome text goes here? Hello and welcome?
+    </div>
+  tickRate: 1000

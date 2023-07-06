@@ -1,0 +1,13 @@
+[Unit]
+Description=Screeps Server (world)
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/screeps-server
+ExecStart=docker-compose up
+ExecStop=docker-compose down
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,25 @@
+version: '3'
+services:
+  screeps:
+    image: screepers/screeps-launcher
+    volumes:
+      - /etc/screeps-server/config.yml:/screeps/config.yml
+      - /var/lib/screeps-server/screeps:/screeps
+    ports:
+      - "21025:21025/tcp"
+    environment:
+      MONGO_HOST: mongo
+      REDIS_HOST: redis
+    restart: unless-stopped
+
+  mongo:
+    image: mongo
+    volumes:
+      - /var/lib/screeps-server/mongo:/data/db
+    restart: unless-stopped
+
+  redis:
+    image: redis
+    volumes:
+      - /var/lib/screeps-server/redis:/data
+    restart: unless-stopped

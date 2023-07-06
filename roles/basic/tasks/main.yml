@@ -1,8 +1,8 @@
+- name: Set timezone to Europe/Helsinki
+  community.general.timezone:
+    name: Europe/Helsinki
+
 - name: Update the system
   apt:
     update_cache: true
     upgrade: full
-
-- name: Set timezone to Europe/Helsinki
-  community.general.timezone:
-    name: Europe/Helsinki
