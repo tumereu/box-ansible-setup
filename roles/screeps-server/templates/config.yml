@@ -7,7 +7,11 @@ mods:
 - screepsmod-features
 bots:
   simplebot: "screepsbot-zeswarm"
-localMods: ./mods
+pinnedPackages:
+  ssri: 8.0.1
+  cacache: 16.1.3
+  passport-steam: 1.0.17
+localMods: ./mods # TODO
 serverConfig:
   welcomeText:  |
     <div>

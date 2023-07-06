@@ -1,5 +1,10 @@
+- name: Ensure the group 'screeps' exists
+  group:
+    name: screeps
+    state: present
+
 - name: Ensure the user 'screeps' exists and belongs to the docker group
-  ansible.builtin.user:
+  user:
     name: screeps
     groups: screeps,docker
 
@@ -15,7 +20,7 @@
 
 - name: Ensure the data directory for the server exists and is owned by the screeps-user
   file:
-    path: /var/lib/screeps-server
+    path: /var/lib/screeps-server/screeps
     state: directory
     owner: screeps
     group: screeps
