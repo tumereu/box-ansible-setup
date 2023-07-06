@@ -1,3 +1,13 @@
+- name: Ensure the destination directory /opt/screeps-server exists
+  file:
+    path: /opt/screeps-server
+    state: directory
+
+- name: Ensure the destination directory /etc/screeps-server exists
+  file:
+    path: /etc/screeps-server
+    state: directory
+
 - name: Ensure the Screeps Server Launcher docker-compose file exists on the server
   template:
     src: templates/docker-compose.yml
@@ -13,12 +23,12 @@
     src: templates/screeps-server.service
     dest: /etc/systemd/system/screeps-server.service
 
-- Name: Ensure the screeps-server service is enabled
+- name: Ensure the screeps-server service is enabled
   service:
     name: screeps-server
     enabled: true
 
-- Name: Ensure the screeps-server service is started
+- name: Ensure the screeps-server service is started
   service:
     name: screeps-server
     state: started
