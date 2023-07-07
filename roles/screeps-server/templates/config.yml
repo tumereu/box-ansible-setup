@@ -12,7 +12,7 @@ mods:
 - screepsmod-tickrate
 - screepsmod-features
 bots:
-  simplebot: "screepsbot-zeswarm"
+  simplebot: "screepsbot-quorum"
 pinnedPackages:
   ssri: 8.0.1
   cacache: 16.1.3
