@@ -1,0 +1,6 @@
+#!/bin/bash
+set -e
+
+# A utility script to open the screeps-server command line interface
+cd /opt/screeps-server
+docker compose exec -it screeps-launcher cli

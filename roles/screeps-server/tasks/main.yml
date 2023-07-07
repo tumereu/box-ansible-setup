@@ -65,3 +65,11 @@
 - name: Ensure the firewall is reloaded
   community.general.ufw:
     state: enabled
+
+- name: Ensure the screeps-cli executable is deployed to the server
+  template:
+    src: templates/screeps-cli
+    dest: /usr/bin/screeps-cli
+    owner: root
+    group: screeps
+    mode: 754
