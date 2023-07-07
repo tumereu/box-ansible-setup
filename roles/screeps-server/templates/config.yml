@@ -1,4 +1,10 @@
 steamKey: "{{ lookup('env', 'STEAM_API_KEY', default=Undefined) }}"
+env:
+  backend:
+    SERVER_PASSWORD: "{{ lookup('env', 'SCREEPS_SERVER_PASSWORD', default=Undefined) }}"
+  shared:
+    MONGO_HOST: mongo
+    REDIS_HOST: redis
 mods:
 - screepsmod-mongo
 - screepsmod-admin-utils
@@ -15,6 +21,8 @@ localMods: ./mods # TODO
 serverConfig:
   welcomeText:  |
     <div>
-      Welcome text goes here? Hello and welcome?
+      Welcome text goes here
+      <br>
+      Samma på Svenska
     </div>
   tickRate: 1000

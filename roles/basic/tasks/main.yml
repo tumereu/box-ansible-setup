@@ -2,7 +2,7 @@
   community.general.timezone:
     name: Europe/Helsinki
 
-- name: Update the system
+- name: Ensure the system is up to date
   apt:
     update_cache: true
     upgrade: full
