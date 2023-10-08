@@ -1,15 +1,17 @@
 services:
   traefik:
-    image: traefik:latest
+    image: "traefik:v2.10"
     container_name: "traefik"
     ports:
       - "443:443"
+      - "80:80"
+      - "8080:8080"
     volumes:
-      - "/usr/local/lib/traefik/letsencrypt:/letsencrypt"
+      - "/usr/local/lib/traefik/acme:/acme"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
       - "/usr/local/etc/traefik:/etc/traefik/"
 
 networks:
   default:
-    external:
-      name: traefik
+    name: traefik
+    external: true

@@ -34,7 +34,7 @@
     name: tandoor
     enabled: true
 
-- name: Ensure the tandoor service is started
+- name: Ensure the tandoor service is (re)started
   service:
     name: tandoor
-    state: started
+    state: restarted

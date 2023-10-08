@@ -51,10 +51,10 @@
     name: screeps-server
     enabled: true
 
-- name: Ensure the screeps-server service is started
+- name: Ensure the screeps-server service is (re)started
   service:
     name: screeps-server
-    state: started
+    state: restarted
 
 - name: Ensure the port 21025 allows traffic
   community.general.ufw:

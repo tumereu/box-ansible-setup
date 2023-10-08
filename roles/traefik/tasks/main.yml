@@ -12,6 +12,16 @@
   docker_network:
     name: traefik
 
+- name: Ensure the configuration directory /usr/local/etc/traefik exists
+  file:
+    path: /usr/local/etc/traefik
+    state: directory
+
+- name: Ensure the configuration file for traefik exists
+  template:
+    src: templates/traefik.toml
+    dest: /usr/local/etc/traefik/traefik.toml
+
 - name: Ensure the destination directory /opt/traefik exists
   file:
     path: /opt/traefik
@@ -33,10 +43,16 @@
     name: traefik
     enabled: true
 
-- name: Ensure the traefik service is started
+- name: Ensure the traefik service is (re)started
   service:
     name: traefik
-    state: started
+    state: restarted
+
+- name: Ensure the port 80 allows traffic
+  community.general.ufw:
+    rule: allow
+    port: '80'
+    proto: tcp
 
 - name: Ensure the port 443 allows traffic
   community.general.ufw:

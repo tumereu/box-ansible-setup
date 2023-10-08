@@ -2,9 +2,18 @@
   remote_user: root
   become: yes
 
+  vars:
+    base_domain: "{{ lookup('env', 'BASE_DOMAIN') }}"
+    acme_email: "{{ lookup('env', 'ACME_EMAIL') }}"
+
   roles:
-    - basic
-    - docker
-    - traefik
-    - screeps-server
-    - tandoor
+    - name: basic
+      tags: [basic]
+    - name: docker
+      tags: [docker]
+    - name: traefik
+      tags: [traefik]
+    - name: screeps-server
+      tags: [screeps-server]
+    - name: tandoor
+      tags: [tandoor]

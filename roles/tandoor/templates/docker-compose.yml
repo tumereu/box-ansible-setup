@@ -10,6 +10,8 @@ services:
       - /usr/local/lib/tandoor/mediafiles:/opt/recipes/mediafiles
     depends_on:
       - tandoor-db
+    networks:
+      - default
 
   tandoor-db:
     image: postgres:15-alpine
@@ -17,6 +19,8 @@ services:
       - ./.env
     volumes:
       - /usr/local/lib/tandoor/psql:/var/lib/postgresql/data
+    networks:
+      - default
 
   tandoor-nginx:
     image: nginx:mainline-alpine
@@ -30,9 +34,9 @@ services:
       - /usr/local/lib/tandoor/mediafiles:/media:ro
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.recipes.rule=Host(`recipes.tumer.dev`)"
-      - "traefik.http.routers.recipes.entrypoints=web_secure"
-      - "traefik.http.routers.recipes.tls.certresolver=le_resolver"
+      - "traefik.http.routers.tandoor.rule=Host(`recipes.{{ base_domain }}`)"
+      - "traefik.http.routers.tandoor.entrypoints=web-secure,web-insecure"
+      - "traefik.http.routers.tandoor.tls.certresolver=le-resolver"
     networks:
       - default
       - traefik

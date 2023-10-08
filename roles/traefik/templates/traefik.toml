@@ -1,0 +1,29 @@
+[log]
+  level = "DEBUG"
+
+[api]
+insecure = true
+
+[entryPoints]
+  [entryPoints.web-insecure]
+  address = ":80"
+
+  [entryPoints.web-secure]
+  address = ":443"
+
+[retry]
+
+[providers.docker]
+  endpoint = "unix:///var/run/docker.sock"
+  domain = "{{ base_domain }}"
+  watch = true
+  exposedByDefault = false
+  network = "traefik"
+
+[certificatesResolvers.le-resolver.acme]
+  email = "{{ acme_email }}"
+  storage = "/acme/acme.json"
+  #caserver="https://acme-staging-v02.api.letsencrypt.org/directory"
+
+  [certificatesResolvers.le-resolver.acme.httpChallenge]
+    entryPoint = "web-insecure"
