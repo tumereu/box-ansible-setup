@@ -1,8 +1,3 @@
 - name: Set timezone to Europe/Helsinki
   community.general.timezone:
     name: Europe/Helsinki
-
-- name: Ensure the system is up to date
-  apt:
-    update_cache: true
-    upgrade: full

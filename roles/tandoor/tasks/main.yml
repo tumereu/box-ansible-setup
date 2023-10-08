@@ -1,0 +1,40 @@
+- name: Ensure the group 'tandoor' exists
+  group:
+    name: tandoor
+    state: present
+
+- name: Ensure the user 'tandoor' exists and belongs to the docker group
+  user:
+    name: tandoor
+    groups: tandoor,docker
+
+- name: Ensure the destination directory /opt/tandoor exists
+  file:
+    path: /opt/tandoor
+    state: directory
+
+- name: Ensure the docker-compose file exists on the server
+  template:
+    src: templates/docker-compose.yml
+    dest: /opt/tandoor/docker-compose.yml
+
+- name: Ensure the .env file exists on the server
+  template:
+    src: templates/.env
+    dest: /opt/tandoor/.env
+
+- name: Ensure there is a systemd entry for the service
+  template:
+    src: templates/tandoor.service
+    dest: /etc/systemd/system/tandoor.service
+
+- name: Ensure the tandoor service is enabled
+  service:
+    daemon_reload: true
+    name: tandoor
+    enabled: true
+
+- name: Ensure the tandoor service is started
+  service:
+    name: tandoor
+    state: started

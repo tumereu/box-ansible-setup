@@ -1,0 +1,47 @@
+services:
+  # Must be called this so that the auto-generated Nginx config can find the container
+  web_recipes:
+    image: vabene1111/recipes
+    env_file:
+      - ./.env
+    volumes:
+      - nginx_config:/opt/recipes/nginx/conf.d
+      - /usr/local/lib/tandoor/staticfiles:/opt/recipes/staticfiles
+      - /usr/local/lib/tandoor/mediafiles:/opt/recipes/mediafiles
+    depends_on:
+      - tandoor-db
+
+  tandoor-db:
+    image: postgres:15-alpine
+    env_file:
+      - ./.env
+    volumes:
+      - /usr/local/lib/tandoor/psql:/var/lib/postgresql/data
+
+  tandoor-nginx:
+    image: nginx:mainline-alpine
+    env_file:
+      - ./.env
+    depends_on:
+      - web_recipes
+    volumes:
+      - nginx_config:/etc/nginx/conf.d:ro
+      - /usr/local/lib/tandoor/staticfiles:/static:ro
+      - /usr/local/lib/tandoor/mediafiles:/media:ro
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.recipes.rule=Host(`recipes.tumer.dev`)"
+      - "traefik.http.routers.recipes.entrypoints=web_secure"
+      - "traefik.http.routers.recipes.tls.certresolver=le_resolver"
+    networks:
+      - default
+      - traefik
+
+networks:
+  default:
+  traefik:
+    external: True
+
+volumes:
+  nginx_config:
+  staticfiles:

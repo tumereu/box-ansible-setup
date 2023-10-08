@@ -1,0 +1,14 @@
+[Unit]
+Description=HTTP Apps
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/tandoor
+ExecStart=docker compose up
+User=tandoor
+Group=tandoor
+
+[Install]
+WantedBy=multi-user.target

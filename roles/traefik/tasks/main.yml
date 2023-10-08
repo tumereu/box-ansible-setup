@@ -1,0 +1,50 @@
+- name: Ensure the user 'traefik' exists
+  group:
+    name: traefik
+    state: present
+
+- name: Ensure the user 'traefik' exists and belongs to the docker group
+  user:
+    name: traefik
+    groups: traefik,docker
+
+- name: Ensure the 'traefik' docker network exists
+  docker_network:
+    name: traefik
+
+- name: Ensure the destination directory /opt/traefik exists
+  file:
+    path: /opt/traefik
+    state: directory
+
+- name: Ensure the docker-compose file exists on the server
+  template:
+    src: templates/docker-compose.yml
+    dest: /opt/traefik/docker-compose.yml
+
+- name: Ensure there is a systemd entry for the service
+  template:
+    src: templates/traefik.service
+    dest: /etc/systemd/system/traefik.service
+
+- name: Ensure the traefik service is enabled
+  service:
+    daemon_reload: true
+    name: traefik
+    enabled: true
+
+- name: Ensure the traefik service is started
+  service:
+    name: traefik
+    state: started
+
+- name: Ensure the port 443 allows traffic
+  community.general.ufw:
+    rule: allow
+    port: '443'
+    proto: tcp
+
+- name: Ensure the firewall is reloaded
+  community.general.ufw:
+    state: enabled
+
