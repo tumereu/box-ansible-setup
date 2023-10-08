@@ -1,14 +1,14 @@
 [Unit]
-Description=Tandooor Recipe Book
+Description=Traefik
 Wants=network-online.target
 After=network-online.target
 
 [Service]
 Type=simple
-WorkingDirectory=/opt/tandoor
+WorkingDirectory=/opt/traefik
 ExecStart=docker compose up
-User=tandoor
-Group=tandoor
+User=traefik
+Group=traefik
 
 [Install]
 WantedBy=multi-user.target
