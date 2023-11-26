@@ -44,3 +44,16 @@
     src: templates/backup-tandoor.sh
     dest: /opt/tandoor/backup-tandoor.sh
     mode: '0755'
+
+- name: Ensure the log dir for tandoor backups exists
+  file:
+    path: /var/log/tandoor-backups
+    state: directory
+
+- name: Ensure the backup script for tandoor is ran weekly
+  ansible.builtin.cron:
+    name: "backup tandoor"
+    minute: "0"
+    hour: "0"
+    weekday: "1"
+    job: "/opt/tandoor/backup-tandoor.sh > /var/log/tandoor-backups/backup.log 2>&1"
