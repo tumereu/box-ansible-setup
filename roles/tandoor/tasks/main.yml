@@ -38,3 +38,9 @@
   service:
     name: tandoor
     state: restarted
+
+- name: Ensure the backup script for tandoor exists
+  template:
+    src: templates/backup-tandoor.sh
+    dest: /opt/tandoor/backup-tandoor.sh
+    mode: '0755'

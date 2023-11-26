@@ -5,10 +5,15 @@
   vars:
     base_domain: "{{ lookup('env', 'BASE_DOMAIN') }}"
     acme_email: "{{ lookup('env', 'ACME_EMAIL') }}"
+    rclone:
+      config_path: "{{ lookup('env', 'RCLONE_CONFIG_FILE_PATH') }}"
+      backups_remote: "{{ lookup('env', 'RCLONE_BACKUP_REMOTE_NAME') }}"
 
   roles:
     - name: basic
       tags: [basic]
+    - name: rclone
+      tags: [rclone]
     - name: docker
       tags: [docker]
     - name: traefik

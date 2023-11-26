@@ -1,0 +1,8 @@
+- name: Ensure rclone is installed
+  apt:
+    name: rclone
+
+- name: Ensure the rclone configuration exists on the remote
+  copy:
+    src: "{{ rclone.config_path }}"
+    dest: /root/.config/rclone/rclone.conf
