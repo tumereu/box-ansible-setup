@@ -27,7 +27,7 @@
 - name: Ensure there is a systemd entry for the service
   template:
     src: templates/factorio-maps.service
-    dest: /etc/systemd/factorio-maps/factorio-maps.service
+    dest: /etc/systemd/system/factorio-maps.service
 
 - name: Ensure the factorio-maps service is enabled
   service:
