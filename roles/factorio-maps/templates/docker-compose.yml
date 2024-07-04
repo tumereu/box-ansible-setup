@@ -1,0 +1,18 @@
+services:
+  nginx:
+    image: nginx:mainline-alpine
+    volumes:
+      - /opt/factorio-maps/html:/usr/share/nginx/html:ro
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.factorio-maps.rule=Host(`factorio-maps.{{ base_domain }}`)"
+      - "traefik.http.routers.factorio-maps.entrypoints=web-secure,web-insecure"
+      - "traefik.http.routers.factorio-maps.tls.certresolver=le-resolver"
+    networks:
+      - default
+      - traefik
+
+networks:
+  default:
+  traefik:
+    external: True

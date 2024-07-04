@@ -22,3 +22,5 @@
       tags: [screeps-server]
     - name: tandoor
       tags: [tandoor]
+    - name: factorio-maps
+      tags: [factorio-maps]

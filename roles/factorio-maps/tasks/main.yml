@@ -1,0 +1,41 @@
+
+- name: Ensure the group 'factorio-maps' exists
+  group:
+    name: factorio-maps
+    state: present
+
+- name: Ensure the user 'factorio-maps' exists and belongs to the docker group
+  user:
+    name: factorio-maps
+    groups: factorio-maps,docker
+
+- name: Ensure the destination directory /opt/factorio-maps exists
+  file:
+    path: /opt/factorio-maps
+    state: directory
+
+- name: Ensure the mounted HTML directory exists
+  file:
+    path: /opt/factorio-maps/html
+    state: directory
+
+- name: Ensure the docker-compose file exists on the server
+  template:
+    src: templates/docker-compose.yml
+    dest: /opt/factorio-maps/docker-compose.yml
+
+- name: Ensure there is a systemd entry for the service
+  template:
+    src: templates/factorio-maps.service
+    dest: /etc/systemd/factorio-maps/factorio-maps.service
+
+- name: Ensure the factorio-maps service is enabled
+  service:
+    daemon_reload: true
+    name: factorio-maps
+    enabled: true
+
+- name: Ensure the factorio-maps service is (re)started
+  service:
+    name: factorio-maps
+    state: restarted

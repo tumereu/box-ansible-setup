@@ -26,3 +26,6 @@ TODO
    RCLONE_CONFIG_FILE_PATH=<path to the rclone config file created in a previous step>
    RCLONE_BACKUP_REMOTE_NAME=<the remote name in rclone for backups>
    ```
+   
+4. Manually install any Factorio maps (generated with the `Mapshot` mod) under `/opt/factorio-maps/html/`, as these
+   are too large to be included in this playbook.

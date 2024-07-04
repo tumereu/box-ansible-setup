@@ -1,0 +1,14 @@
+[Unit]
+Description=Factorio Map Hosting
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/factorio-maps
+ExecStart=docker compose up
+User=factorio-maps
+Group=factorio-maps
+
+[Install]
+WantedBy=multi-user.target
